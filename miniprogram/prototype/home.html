@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=393, initial-scale=1.0">
+  <title>首页</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50" style="width:393px;height:804px;">
+  <div class="pt-12 px-4 pb-4">
+    <div class="mb-6 flex flex-col items-center">
+      <button id="uploadBtn" class="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold text-base shadow hover:bg-blue-700 transition mb-4">上传照片</button>
+      <input type="file" id="fileInput" accept="image/*" class="hidden" />
+      <div id="effectArea" class="w-full flex justify-between mt-4 hidden">
+        <div class="flex flex-col items-center">
+          <img src="https://via.placeholder.com/80x100?text=正面" class="w-20 h-24 rounded-lg bg-gray-200 mb-1" alt="正面效果">
+          <span class="text-xs text-gray-700">正面</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="https://via.placeholder.com/80x100?text=侧面" class="w-20 h-24 rounded-lg bg-gray-200 mb-1" alt="侧面效果">
+          <span class="text-xs text-gray-700">侧面</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="https://via.placeholder.com/80x100?text=背面" class="w-20 h-24 rounded-lg bg-gray-200 mb-1" alt="背面效果">
+          <span class="text-xs text-gray-700">背面</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8">
+      <div class="text-lg font-semibold mb-2">模型库</div>
+      <div class="grid grid-cols-3 gap-3">
+        <img src="../static/hair1.png" class="w-24 h-24 object-cover rounded-lg shadow" alt="模型1">
+        <img src="../static/hair2.png" class="w-24 h-24 object-cover rounded-lg shadow" alt="模型2">
+        <img src="../static/hair3.png" class="w-24 h-24 object-cover rounded-lg shadow" alt="模型3">
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('uploadBtn').onclick = function() {
+      document.getElementById('fileInput').click();
+    };
+    document.getElementById('fileInput').onchange = function() {
+      document.getElementById('effectArea').classList.remove('hidden');
+    };
+  </script>
+</body>
+</html> 

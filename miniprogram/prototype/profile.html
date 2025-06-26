@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=393, initial-scale=1.0">
+  <title>个人中心</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50" style="width:393px;height:804px;">
+  <div class="pt-12 px-4 pb-4">
+    <!-- 个人信息 -->
+    <div class="flex flex-col items-center mb-6">
+      <img src="https://tdesign.gtimg.com/miniprogram/images/avatar1.png" class="w-20 h-20 rounded-full shadow mb-2" alt="头像">
+      <div class="text-lg font-semibold mb-1">昵称：小明</div>
+      <div class="text-sm text-gray-500 mb-2">手机号：138****8888</div>
+      <button class="bg-blue-50 text-blue-600 rounded-lg px-6 py-2 font-medium border border-blue-200 hover:bg-blue-100 transition mb-2">修改资料</button>
+    </div>
+    <!-- 积分与充值 -->
+    <div class="bg-white rounded-lg shadow p-4 mb-4">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-base font-semibold">当前积分</span>
+        <span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-base font-bold">88</span>
+      </div>
+      <div class="mb-2">
+        <div class="text-base font-semibold mb-2">充值套餐</div>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-gray-50 rounded-lg p-2 flex flex-col items-center cursor-pointer hover:ring-2 ring-blue-400">
+            <div class="text-lg font-bold text-blue-600 mb-1">10</div>
+            <div class="text-xs text-gray-500 mb-1">积分</div>
+            <div class="text-sm text-gray-700">￥6</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-2 flex flex-col items-center cursor-pointer hover:ring-2 ring-blue-400">
+            <div class="text-lg font-bold text-blue-600 mb-1">30</div>
+            <div class="text-xs text-gray-500 mb-1">积分</div>
+            <div class="text-sm text-gray-700">￥16</div>
+          </div>
+          <div class="bg-gray-50 rounded-lg p-2 flex flex-col items-center cursor-pointer hover:ring-2 ring-blue-400">
+            <div class="text-lg font-bold text-blue-600 mb-1">100</div>
+            <div class="text-xs text-gray-500 mb-1">积分</div>
+            <div class="text-sm text-gray-700">￥48</div>
+          </div>
+        </div>
+      </div>
+      <button class="w-full bg-green-500 text-white rounded-lg py-2 font-semibold text-base shadow hover:bg-green-600 transition">微信支付</button>
+    </div>
+    <!-- 设置 -->
+    <div class="bg-white rounded-lg shadow p-4 mb-4">
+      <div class="text-base font-semibold mb-2">通知设置</div>
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-gray-700">消息推送</span>
+        <label class="inline-flex relative items-center cursor-pointer">
+          <input type="checkbox" value="" class="sr-only peer" checked>
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:bg-blue-600 transition"></div>
+        </label>
+      </div>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <div class="text-base font-semibold mb-2">账户设置</div>
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-gray-700">修改手机号</span>
+        <button class="text-blue-600 font-medium hover:underline">去修改</button>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-gray-700">退出登录</span>
+        <button class="text-red-500 font-medium hover:underline">退出</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
