@@ -1,0 +1,37 @@
+.page {
+  background: #f7f8fa;
+  min-height: 100vh;
+  padding: 24rpx 0 0 0;
+}
+.profile-header {
+  display: flex;
+  align-items: center;
+}
+.profile-info {
+  margin-left: 24rpx;
+}
+.profile-nick {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #222;
+}
+.profile-phone {
+  font-size: 26rpx;
+  color: #888;
+}
+.score-badge {
+  background: #e6f0ff;
+  color: #0052d9;
+  border-radius: 16rpx;
+  padding: 4rpx 20rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.recharge-group {
+  display: flex;
+  gap: 12rpx;
+}
+.recharge-tag {
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+} 

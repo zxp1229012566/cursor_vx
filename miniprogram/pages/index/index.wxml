@@ -1,28 +1,62 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+<view class="page">
+  <!-- 首页Tab -->
+  <view wx:if="{{activeTab === 'home'}}">
+    <!-- 上传区域 -->
+    <view class="section">
+      <t-uploader
+        files="{{files}}"
+        max="1"
+        bind:select="onSelect"
+        bind:remove="onRemove"
+        bind:success="onUploadSuccess"
+        bind:fail="onUploadFail"
+        tips="请上传正面照片"
+        showUploadProgress
+      />
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+
+    <!-- 效果图展示 -->
+    <view class="section" wx:if="{{showEffect}}">
+      <view class="effect-title">效果图预览</view>
+      <view class="effect-list">
+        <t-image src="{{effectFront}}" shape="round" class="effect-img" />
+        <t-image src="{{effectSide}}" shape="round" class="effect-img" />
+        <t-image src="{{effectBack}}" shape="round" class="effect-img" />
+      </view>
     </view>
-    <t-button theme="primary">按钮</t-button>
+
+    <!-- 模型库 -->
+    <view class="section">
+      <view class="model-title">模型库</view>
+      <t-grid column="3">
+        <t-grid-item wx:for="{{modelList}}" wx:key="index">
+          <t-image src="{{item}}" shape="round" class="model-img" />
+        </t-grid-item>
+      </t-grid>
+    </view>
   </view>
-</scroll-view>
+
+  <!-- 个人中心Tab -->
+  <view wx:if="{{activeTab === 'profile'}}">
+    <profile-comp />
+  </view>
+
+  <!-- 悬浮+按钮弹窗，内容为effect页面 -->
+  <t-dialog visible="{{showEffectDialog}}" title="上传与模板选择" showOverlay bind:close="onCloseEffectDialog">
+    <effect-comp bind:close="onCloseEffectDialog" />
+  </t-dialog>
+
+  <!-- 自定义底部TabBar -->
+  <view class="custom-tabbar">
+    <view class="tab-item {{activeTab === 'home' ? 'active' : ''}}" bindtap="switchTab" data-tab="home">
+      <t-icon name="home" size="32rpx" />
+      <text>首页</text>
+    </view>
+    <view class="fab-btn" bindtap="openEffectDialog">+</view>
+    <view class="tab-item {{activeTab === 'profile' ? 'active' : ''}}" bindtap="switchTab" data-tab="profile">
+      <t-icon name="user" size="32rpx" />
+      <text>我的</text>
+    </view>
+  </view>
+</view>
