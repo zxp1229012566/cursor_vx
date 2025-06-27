@@ -5,34 +5,91 @@
   <meta name="viewport" content="width=393, initial-scale=1.0">
   <title>积分充值</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    .td-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px 0 #e5e7eb55;
+      border: 1.5px solid #f5e9da;
+      margin-bottom: 18px;
+      padding: 20px 18px 14px 18px;
+    }
+    .td-btn {
+      background: #0052d9;
+      color: #fff;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 10px 0;
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px 0 #0052d933;
+      transition: background 0.2s;
+      border: none;
+    }
+    .td-btn:hover {
+      background: #36b37e;
+    }
+    .td-section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 12px;
+    }
+    .td-divider {
+      height: 1px;
+      background: #f5e9da;
+      margin: 16px 0;
+      border: none;
+    }
+    .td-package {
+      background: #f9fafb;
+      border-radius: 14px;
+      border: 1.5px solid #f5e9da;
+      padding: 16px 0 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .td-package:hover {
+      box-shadow: 0 2px 8px 0 #0052d955;
+      border-color: #0052d9;
+    }
+  </style>
 </head>
 <body class="bg-gray-50" style="width:393px;height:804px;">
   <div class="pt-12 px-4 pb-4">
-    <div class="mb-6 flex items-center justify-between">
-      <div class="text-lg font-semibold">当前积分</div>
-      <div class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-base font-bold">88</div>
-    </div>
-    <div class="mb-6">
-      <div class="text-lg font-semibold mb-2">选择充值套餐</div>
-      <div class="grid grid-cols-3 gap-3">
-        <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center cursor-pointer hover:ring-2 ring-blue-400">
-          <div class="text-xl font-bold text-blue-600 mb-1">10</div>
-          <div class="text-xs text-gray-500 mb-1">积分</div>
-          <div class="text-sm text-gray-700">￥6</div>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center cursor-pointer hover:ring-2 ring-blue-400">
-          <div class="text-xl font-bold text-blue-600 mb-1">30</div>
-          <div class="text-xs text-gray-500 mb-1">积分</div>
-          <div class="text-sm text-gray-700">￥16</div>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center cursor-pointer hover:ring-2 ring-blue-400">
-          <div class="text-xl font-bold text-blue-600 mb-1">100</div>
-          <div class="text-xs text-gray-500 mb-1">积分</div>
-          <div class="text-sm text-gray-700">￥48</div>
+    <div class="td-card">
+      <div class="td-section-title flex items-center mb-3"><i class="ti ti-coin text-yellow-500 mr-2"></i>积分充值</div>
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-base font-semibold">当前积分</span>
+        <span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-base font-bold">88</span>
+      </div>
+      <div class="mb-4">
+        <div class="text-base font-semibold mb-2">选择充值套餐</div>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="td-package">
+            <div class="text-xl font-bold text-blue-600 mb-1">10</div>
+            <div class="text-xs text-gray-500 mb-1">积分</div>
+            <div class="text-sm text-gray-700">￥6</div>
+          </div>
+          <div class="td-package">
+            <div class="text-xl font-bold text-blue-600 mb-1">30</div>
+            <div class="text-xs text-gray-500 mb-1">积分</div>
+            <div class="text-sm text-gray-700">￥16</div>
+          </div>
+          <div class="td-package">
+            <div class="text-xl font-bold text-blue-600 mb-1">100</div>
+            <div class="text-xs text-gray-500 mb-1">积分</div>
+            <div class="text-sm text-gray-700">￥48</div>
+          </div>
         </div>
       </div>
+      <button class="td-btn mt-3">微信支付</button>
     </div>
-    <button class="w-full bg-green-500 text-white rounded-lg py-3 font-semibold text-base shadow hover:bg-green-600 transition">微信支付</button>
   </div>
 </body>
 </html> 

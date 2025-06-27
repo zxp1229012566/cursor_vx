@@ -1,0 +1,58 @@
+.help-container {
+  width: 393px;
+  margin: 0 auto;
+  padding: 24px 18px 0 18px;
+  background: #f9fafb;
+  min-height: 804px;
+}
+.help-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0052d9;
+  margin-bottom: 18px;
+}
+.help-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.help-item {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px 0 #e5e7eb33;
+  border: 1.5px solid #f5e9da;
+  padding: 16px 14px;
+}
+.help-q {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+.help-a {
+  color: #666;
+  font-size: 15px;
+}
+.about-section {
+  margin-top: 32px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px 0 #e5e7eb33;
+  border: 1.5px solid #f5e9da;
+  padding: 20px 14px;
+}
+.about-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0052d9;
+  margin-bottom: 12px;
+}
+.about-desc {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 18px;
+}
+.about-info {
+  font-size: 15px;
+  color: #666;
+  line-height: 2;
+} 

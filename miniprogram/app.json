@@ -1,12 +1,40 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/profile/profile",
+    "pages/help/help",
     "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Weixin",
     "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#888",
+    "selectedColor": "#0052d9",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tab-home.png",
+        "selectedIconPath": "static/tab-home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "iconPath": "static/tab-user.png",
+        "selectedIconPath": "static/tab-user-active.png",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pages/help/help",
+        "iconPath": "static/tab-help.png",
+        "selectedIconPath": "static/tab-help-active.png",
+        "text": "帮助"
+      }
+    ]
   },
   "componentFramework": "glass-easel",
   "lazyCodeLoading": "requiredComponents"

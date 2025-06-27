@@ -1,0 +1,10 @@
+<view class="about-container">
+  <view class="about-title">关于本小程序</view>
+  <view class="about-desc">
+    本产品为发型AI效果小程序，提供照片上传、AI发型生成、模型库管理、积分充值等功能。
+  </view>
+  <view class="about-info">
+    <view>版本号：1.0.0</view>
+    <view>产品支持：support@example.com</view>
+  </view>
+</view> 

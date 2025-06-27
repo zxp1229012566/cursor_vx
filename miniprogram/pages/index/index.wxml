@@ -1,28 +1,111 @@
 <!--index.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
+    <!-- 首页内容 -->
+    <view wx:if="{{tab === 'home'}}">
+      <view class="td-card td-card-upload">
+        <view class="td-card-title">上传照片</view>
+        <t-upload
+          files="{{uploadFiles}}"
+          bind:success="onUploadSuccess"
+          bind:fail="onUploadFail"
+          bind:remove="onUploadRemove"
+          multiple="false"
+          max="1"
+          showUploadProgress
+          gridConfig="{column: 1}"
+          tips="仅支持1张图片，点击上传"
+        />
+      </view>
+      <view class="td-card td-card-effect" wx:if="{{showEffect}}">
+        <view class="td-card-title">效果图</view>
+        <view class="effect-imgs">
+          <t-image src="{{effectImages.front}}" shape="round" class="effect-img"></t-image>
+          <t-image src="{{effectImages.side}}" shape="round" class="effect-img"></t-image>
+          <t-image src="{{effectImages.back}}" shape="round" class="effect-img"></t-image>
         </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+      </view>
+      <view class="td-card td-card-models">
+        <view class="td-card-title">模型库</view>
+        <view class="model-list">
+          <block wx:for="{{modelImages}}" wx:key="index">
+            <t-image src="{{item}}" shape="round" class="model-img"></t-image>
+          </block>
+        </view>
+      </view>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+
+    <!-- 我的页面内容 -->
+    <view wx:if="{{tab === 'profile'}}">
+      <view class="td-card td-card-profile">
+        <view class="td-card-title">个人信息</view>
+        <view class="profile-info">
+          <t-image src="https://tdesign.gtimg.com/miniprogram/images/avatar1.png" shape="circle" class="profile-avatar"></t-image>
+          <view class="profile-text">
+            <view class="profile-nick">昵称：小猪</view>
+            <view class="profile-phone">手机号：138****8888</view>
+          </view>
+        </view>
+        <t-button theme="primary" size="small" class="profile-btn">修改资料</t-button>
+      </view>
+      <view class="td-card td-card-recharge">
+        <view class="td-card-title">积分与充值</view>
+        <view class="recharge-row">
+          <text>当前积分</text>
+          <text class="recharge-point">88</text>
+        </view>
+        <view class="recharge-packages">
+          <block wx:for="{{rechargePackages}}" wx:key="index">
+            <view class="recharge-package" bindtap="onRechargeSelect" data-index="{{index}}">
+              <view class="package-point">{{item.point}}</view>
+              <view class="package-label">积分</view>
+              <view class="package-price">￥{{item.price}}</view>
+            </view>
+          </block>
+        </view>
+        <t-button theme="success" size="small" class="recharge-btn">微信支付</t-button>
+      </view>
+      <view class="td-card td-card-setting">
+        <view class="td-card-title">通知设置</view>
+        <view class="setting-row">
+          <text>消息推送</text>
+          <t-switch checked="{{notifyPush}}" bind:change="onNotifyChange" />
+        </view>
+      </view>
+      <view class="td-card td-card-setting">
+        <view class="td-card-title">账户设置</view>
+        <t-cell-group>
+          <t-cell title="修改手机号" arrow bindtap="onModifyPhone"></t-cell>
+          <t-cell title="退出登录" arrow theme="danger" bindtap="onLogout"></t-cell>
+          <t-cell title="帮助" arrow bindtap="onHelp"></t-cell>
+          <t-cell title="关于" arrow bindtap="onAbout"></t-cell>
+        </t-cell-group>
+      </view>
     </view>
-    <t-button theme="primary">按钮</t-button>
+
+    <!-- 上传与模板选择弹窗 -->
+    <t-dialog visible="{{showDialog}}" title="上传与模板选择" bind:close="onDialogClose">
+      <view class="dialog-content">
+        <t-upload
+          files="{{dialogUploadFiles}}"
+          bind:success="onDialogUploadSuccess"
+          bind:fail="onDialogUploadFail"
+          bind:remove="onDialogUploadRemove"
+          multiple="false"
+          max="1"
+          showUploadProgress
+          gridConfig="{column: 1}"
+          tips="仅支持1张图片，点击上传"
+        />
+        <view class="dialog-model-list">
+          <block wx:for="{{modelImages}}" wx:key="index">
+            <t-image src="{{item}}" shape="round" class="model-img"></t-image>
+          </block>
+        </view>
+      </view>
+    </t-dialog>
+
   </view>
 </scroll-view>
+
+<t-back-top theme="round" text="顶部"></t-back-top>

@@ -1,5 +1,16 @@
 {
     "usingComponents": {
-        "t-button": "tdesign-miniprogram/button/button"
-      }
+        "t-tabbar": "tdesign-miniprogram/tab-bar/tab-bar",
+        "t-tabbar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
+        "t-button": "tdesign-miniprogram/button/button",
+        "t-image": "tdesign-miniprogram/image/image",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog",
+        "t-upload": "tdesign-miniprogram/upload/upload",
+        "t-switch": "tdesign-miniprogram/switch/switch",
+        "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
+        "t-cell": "tdesign-miniprogram/cell/cell",
+        "t-back-top": "tdesign-miniprogram/back-top/back-top"
+    },
+    "navigationBarTitleText": "首页",
+    "navigationStyle": "default"
 }

@@ -1,0 +1,32 @@
+<view class="help-container">
+  <view class="help-title">常见问题与帮助</view>
+  <view class="help-list">
+    <view class="help-item">
+      <view class="help-q">Q: 如何上传照片？</view>
+      <view class="help-a">A: 在首页点击上传按钮，选择照片即可。</view>
+    </view>
+    <view class="help-item">
+      <view class="help-q">Q: 如何查看效果图？</view>
+      <view class="help-a">A: 上传照片后会自动生成正面、侧面、背面效果图。</view>
+    </view>
+    <view class="help-item">
+      <view class="help-q">Q: 如何充值积分？</view>
+      <view class="help-a">A: 在"我的"页面选择充值套餐，点击微信支付即可。</view>
+    </view>
+    <view class="help-item">
+      <view class="help-q">Q: 模型库图片如何更换？</view>
+      <view class="help-a">A: 上传新图片后会自动加入模型库。</view>
+    </view>
+  </view>
+  <view class="about-section">
+    <view class="about-title">关于本小程序</view>
+    <view class="about-desc">
+      本产品为发型AI效果小程序，提供照片上传、AI发型生成、模型库管理、积分充值等功能。
+    </view>
+    <view class="about-info">
+      <view>版本号：1.0.0</view>
+      <view>产品支持：support@example.com</view>
+    </view>
+  </view>
+  <t-back-top theme="round" text="顶部"></t-back-top>
+</view> 
