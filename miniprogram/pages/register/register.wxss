@@ -1,0 +1,50 @@
+/* register.wxss */
+@import '../login/login.wxss';
+
+/* 协议部分样式 */
+.agreement-section {
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.agreement-checkbox {
+  margin-right: 10rpx !important;
+}
+
+.agreement-link {
+  color: #4080FF;
+  text-decoration: underline;
+  margin: 0 5rpx;
+}
+
+/* 注册按钮样式 */
+.register-button {
+  border-radius: 40rpx !important;
+  background: linear-gradient(135deg, #4080FF 0%, #6A36FF 100%) !important;
+  height: 90rpx !important;
+  font-size: 32rpx !important;
+  box-shadow: 0 6rpx 20rpx rgba(64, 128, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.register-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 3rpx 10rpx rgba(64, 128, 255, 0.2) !important;
+}
+
+/* 登录提示样式 */
+.login-tip {
+  text-align: center;
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.login-link {
+  color: #4080FF;
+  margin-left: 10rpx;
+  text-decoration: underline;
+} 

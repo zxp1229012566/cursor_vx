@@ -1,0 +1,115 @@
+<!--register.wxml-->
+<view class="page-wrapper">
+  <!-- 页面顶部 -->
+  <view class="page-header">
+    <view class="header-content">
+      <image class="header-logo" src="/static/logo.png" mode="aspectFit"></image>
+      <view class="header-title">用户注册</view>
+    </view>
+  </view>
+  
+  <view class="container">
+    <!-- 注册表单 -->
+    <view class="card-section register-section">
+      <view class="section-header">
+        <view class="section-title">创建账号</view>
+        <view class="section-subtitle">请填写您的注册信息</view>
+      </view>
+      
+      <view class="form-group">
+        <view class="form-label">昵称</view>
+        <t-input 
+          value="{{nickname}}" 
+          placeholder="请输入昵称" 
+          maxlength="20"
+          bind:change="onNicknameChange"
+          t-class="form-input"
+        />
+      </view>
+      
+      <view class="form-group">
+        <view class="form-label">手机号</view>
+        <t-input 
+          value="{{phone}}" 
+          placeholder="请输入手机号" 
+          type="number"
+          maxlength="11"
+          bind:change="onPhoneChange"
+          t-class="form-input"
+        />
+      </view>
+      
+      <view class="form-group">
+        <view class="form-label">验证码</view>
+        <view class="code-input-wrapper">
+          <t-input 
+            value="{{code}}" 
+            placeholder="请输入验证码" 
+            type="number"
+            maxlength="6"
+            bind:change="onCodeChange"
+            t-class="code-input"
+          />
+          <t-button 
+            theme="primary" 
+            variant="outline" 
+            size="small"
+            disabled="{{!canSendCode || codeCountdown > 0}}"
+            bind:tap="onSendCode"
+            t-class="send-code-btn"
+          >
+            {{codeCountdown > 0 ? codeCountdown + 's' : '发送验证码'}}
+          </t-button>
+        </view>
+      </view>
+      
+      <view class="agreement-section">
+        <t-checkbox 
+          value="{{agreedToTerms}}" 
+          bind:change="onAgreementChange"
+          t-class="agreement-checkbox"
+        >
+          我已阅读并同意
+        </t-checkbox>
+        <text class="agreement-link" bind:tap="onShowTerms">《用户协议》</text>
+        <text>和</text>
+        <text class="agreement-link" bind:tap="onShowPrivacy">《隐私政策》</text>
+      </view>
+      
+      <view class="register-actions">
+        <t-button 
+          theme="primary" 
+          size="large" 
+          block
+          loading="{{isRegistering}}"
+          disabled="{{!canRegister}}"
+          bind:tap="onRegister"
+          t-class="register-button"
+        >
+          {{isRegistering ? '注册中...' : '立即注册'}}
+        </t-button>
+      </view>
+      
+      <view class="login-tip">
+        <text>已有账号？</text>
+        <text class="login-link" bind:tap="onGoToLogin">立即登录</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<t-toast id="t-toast" />
+<t-dialog
+  visible="{{showTermsDialog}}"
+  title="用户协议"
+  content="{{termsContent}}"
+  confirm-btn="我知道了"
+  bind:confirm="onCloseTerms"
+/>
+<t-dialog
+  visible="{{showPrivacyDialog}}"
+  title="隐私政策"
+  content="{{privacyContent}}"
+  confirm-btn="我知道了"
+  bind:confirm="onClosePrivacy"
+/> 

@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
+    "pages/register/register",
     "pages/profile/profile",
     "pages/help/help",
     "pages/logs/logs"
@@ -42,5 +44,6 @@
   "sitemapLocation": "sitemap.json",
   "useExtendedLib": {
     "weui": true
-  }
+  },
+  "cloud": true
 }
