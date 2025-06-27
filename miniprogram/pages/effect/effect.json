@@ -1,10 +1,11 @@
 {
   "usingComponents": {
-    "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar",
     "t-loading": "tdesign-miniprogram/loading/loading",
-    "t-card": "tdesign-miniprogram/card/card",
+    "t-button": "tdesign-miniprogram/button/button",
     "t-image": "tdesign-miniprogram/image/image",
-    "t-button": "tdesign-miniprogram/button/button"
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-back-top": "tdesign-miniprogram/back-top/back-top"
   },
-  "navigationBarTitleText": "效果图"
+  "navigationBarTitleText": "效果预览",
+  "navigationStyle": "custom"
 } 

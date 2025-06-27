@@ -1,140 +1,245 @@
 // index.ts
 // 获取应用实例
 const app = getApp<IAppOption>()
-const defaultAvatarUrl = '/static/me.png'
+
+interface Template {
+  id: string;
+  name: string;
+  image: string;
+}
+
+interface UploadFile {
+  url: string;
+  name: string;
+  type: string;
+  size: number;
+}
+
+type ViewType = 'front' | 'side' | 'back';
+
+interface ResultImages {
+  front: string;
+  side: string;
+  back: string;
+}
 
 Page({
   data: {
-    tab: 'home',
-    showDialog: false,
-    uploadFiles: [],
-    dialogUploadFiles: [],
-    showEffect: false,
-    effectImages: {
-      front: 'https://via.placeholder.com/80x100?text=正面',
-      side: 'https://via.placeholder.com/80x100?text=侧面',
-      back: 'https://via.placeholder.com/80x100?text=背面',
+    // 上传相关
+    uploadFiles: [] as UploadFile[],
+    hasUploadedImage: false,
+    uploadConfig: {
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera']
     },
-    modelImages: [
-      '/static/hair1.png',
-      '/static/hair2.png',
-      '/static/hair3.png',
-    ],
-    rechargePackages: [
-      { point: 10, price: 6 },
-      { point: 30, price: 16 },
-      { point: 100, price: 48 },
-    ],
-    notifyPush: true,
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    
+    // 发型模板相关
+    gender: 'male' as 'male' | 'female',
+    selectedTemplateId: '',
+    templates: [
+      { id: 'male-1', name: '短发1', image: '/static/hair1.png' },
+      { id: 'male-2', name: '短发2', image: '/static/hair2.png' },
+      { id: 'male-3', name: '短发3', image: '/static/hair3.png' },
+    ] as Template[],
+    femaleTemplates: [
+      { id: 'female-1', name: '长发1', image: '/static/hair1.png' },
+      { id: 'female-2', name: '长发2', image: '/static/hair2.png' },
+      { id: 'female-3', name: '长发3', image: '/static/hair3.png' },
+    ] as Template[],
+    
+    // 效果图相关
+    showResult: false,
+    currentView: 'front' as ViewType,
+    resultImages: {
+      front: '',
+      side: '',
+      back: ''
+    } as ResultImages,
+    
+    // 生成相关
+    isGenerating: false,
+    canGenerate: false,
+    
+    // 用户相关
+    userPoints: 10,
+    showPointsDialog: false,
   },
-  methods: {
-    // 事件处理函数
-    bindViewTap(e: any) {
-      wx.navigateTo({
-        url: '../logs/logs',
-      })
-    },
-    onChooseAvatar(e: any) {
-      const { avatarUrl } = e.detail
-      const { nickName } = this.data.userInfo
+  
+  onLoad() {
+    // 加载用户数据
+    this.loadUserData();
+  },
+  
+  loadUserData() {
+    // 模拟从服务器获取用户数据
+    // 实际项目中应该调用API获取用户数据
+    setTimeout(() => {
       this.setData({
-        "userInfo.avatarUrl": avatarUrl,
-        hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-      })
-    },
-    onInputChange(e: any) {
-      const nickName = e.detail.value
-      const { avatarUrl } = this.data.userInfo
-      this.setData({
-        "userInfo.nickName": nickName,
-        hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-      })
-    },
-    getUserProfile() {
-      // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-      wx.getUserProfile({
-        desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-        success: (res) => {
-          console.log(res)
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    },
-    onTabbarChange(e: any) {
-      const value = e.detail.value;
-      if (value === 'plus') {
-        this.setData({ showDialog: true });
-        return;
+        userPoints: 10
+      });
+    }, 500);
+  },
+  
+  // 上传照片相关方法
+  onUploadSuccess(e: any) {
+    console.log('上传成功', e.detail.files);
+    
+    this.setData({ 
+      uploadFiles: e.detail.files,
+      hasUploadedImage: true,
+      canGenerate: this.data.selectedTemplateId !== ''
+    });
+    
+    wx.showToast({
+      title: '上传成功',
+      icon: 'success'
+    });
+  },
+  
+  onUploadFail(e: any) {
+    console.error('上传失败', e);
+    wx.showToast({ 
+      title: '上传失败，请重试', 
+      icon: 'none' 
+    });
+  },
+  
+  onUploadRemove() {
+    this.setData({ 
+      uploadFiles: [],
+      hasUploadedImage: false,
+      canGenerate: false,
+      showResult: false
+    });
+  },
+  
+  previewImage() {
+    if (this.data.uploadFiles.length > 0 && this.data.uploadFiles[0].url) {
+      wx.previewImage({
+        urls: [this.data.uploadFiles[0].url]
+      });
+    }
+  },
+  
+  // 模板选择相关方法
+  onGenderSwitch(e: any) {
+    const gender = e.currentTarget.dataset.gender as 'male' | 'female';
+    
+    this.setData({
+      gender,
+      templates: gender === 'male' ? this.data.templates : this.data.femaleTemplates,
+      selectedTemplateId: '',
+      canGenerate: false,
+      showResult: false
+    });
+  },
+  
+  onSelectTemplate(e: any) {
+    const id = e.currentTarget.dataset.id;
+    
+    this.setData({
+      selectedTemplateId: id,
+      canGenerate: this.data.hasUploadedImage
+    });
+  },
+  
+  // 效果图相关方法
+  onViewChange(e: any) {
+    const view = e.detail.value as ViewType;
+    this.setData({
+      currentView: view
+    });
+  },
+  
+  previewResultImage() {
+    if (this.data.showResult) {
+      const view = this.data.currentView;
+      const url = this.data.resultImages[view];
+      if (url) {
+        wx.previewImage({
+          urls: [url]
+        });
       }
-      this.setData({ tab: value });
-    },
-    // 首页上传
-    onUploadSuccess(e: any) {
-      this.setData({ uploadFiles: e.detail.files, showEffect: true });
-      // 可在此处调用后端生成效果图，更新effectImages
-    },
-    onUploadFail(e: any) {
-      wx.showToast({ title: '上传失败', icon: 'none' });
-    },
-    onUploadRemove(e: any) {
-      this.setData({ uploadFiles: [], showEffect: false });
-    },
-    // 弹窗上传
-    onDialogUploadSuccess(e: any) {
-      this.setData({ dialogUploadFiles: e.detail.files });
-    },
-    onDialogUploadFail(e: any) {
-      wx.showToast({ title: '上传失败', icon: 'none' });
-    },
-    onDialogUploadRemove(e: any) {
-      this.setData({ dialogUploadFiles: [] });
-    },
-    // 悬浮+按钮
-    onPlusClick() {
-      this.setData({ showDialog: true });
-    },
-    onDialogClose() {
-      this.setData({ showDialog: false, dialogUploadFiles: [] });
-    },
-    // 我的-充值套餐
-    onRechargeSelect(e: any) {
-      const idx = e.currentTarget.dataset.index;
-      wx.showToast({ title: `选择了${this.data.rechargePackages[idx].point}积分`, icon: 'none' });
-    },
-    // 我的-通知设置
-    onNotifyChange(e: any) {
-      this.setData({ notifyPush: e.detail.checked });
-    },
-    // 我的-修改手机号
-    onModifyPhone() {
-      wx.showToast({ title: '修改手机号', icon: 'none' });
-    },
-    // 我的-退出登录
-    onLogout() {
-      wx.showModal({ title: '提示', content: '确定要退出登录吗？', success: (res) => {
-        if (res.confirm) {
-          wx.showToast({ title: '已退出', icon: 'none' });
-        }
-      }});
-    },
-    // 我的-帮助
-    onHelp() {
-      wx.navigateTo({ url: '/pages/help/help' });
-    },
-    // 我的-关于
-    onAbout() {
-      wx.navigateTo({ url: '/pages/about/about' });
-    },
+    }
   },
+  
+  onSaveImage() {
+    if (!this.data.showResult) return;
+    
+    wx.showLoading({ title: '保存中...' });
+    
+    // 模拟保存图片
+    setTimeout(() => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '图片已保存到相册',
+        icon: 'success'
+      });
+    }, 1500);
+  },
+  
+  // 生成效果图
+  onGenerate() {
+    // 检查是否已上传照片和选择模板
+    if (!this.data.hasUploadedImage) {
+      wx.showToast({ title: '请先上传您的照片', icon: 'none' });
+      return;
+    }
+    
+    if (!this.data.selectedTemplateId) {
+      wx.showToast({ title: '请选择一个发型模板', icon: 'none' });
+      return;
+    }
+    
+    // 检查积分是否足够
+    if (this.data.userPoints <= 0) {
+      this.setData({ showPointsDialog: true });
+      return;
+    }
+    
+    // 开始生成效果图
+    this.setData({ isGenerating: true });
+    
+    // 模拟生成过程
+    setTimeout(() => {
+      // 获取选中的模板
+      let selectedTemplate: Template | null = null;
+      const templates = this.data.gender === 'male' ? this.data.templates : this.data.femaleTemplates;
+      
+      for (const template of templates) {
+        if (template.id === this.data.selectedTemplateId) {
+          selectedTemplate = template;
+          break;
+        }
+      }
+      
+      if (!selectedTemplate) return;
+      
+      // 生成完成后，更新效果图和积分
+      this.setData({
+        isGenerating: false,
+        showResult: true,
+        userPoints: this.data.userPoints - 1,
+        resultImages: {
+          front: selectedTemplate.image,
+          side: '/static/hair2.png',
+          back: '/static/hair3.png',
+        },
+        currentView: 'front'
+      });
+      
+      wx.showToast({ title: '效果图生成成功', icon: 'success' });
+    }, 2000);
+  },
+  
+  // 积分相关方法
+  onClosePointsDialog() {
+    this.setData({ showPointsDialog: false });
+  },
+  
+  onGoToRecharge() {
+    this.setData({ showPointsDialog: false });
+    wx.navigateTo({ url: '/pages/recharge/recharge' });
+  }
 })
+

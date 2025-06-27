@@ -1,116 +1,205 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
+<view class="page-wrapper">
+  <!-- 页面顶部 -->
+  <view class="page-header">
+    <view class="header-content">
+      <image class="header-logo" src="/static/logo.png" mode="aspectFit"></image>
+      <view class="header-title">发型试戴</view>
+    </view>
+  </view>
+  
   <view class="container">
-    <!-- 首页内容 -->
-    <view wx:if="{{tab === 'home'}}">
-      <view class="index-page">
-        <t-cell-group title="上传照片">
-          <t-cell>
-            <t-upload
-              files="{{uploadFiles}}"
-              bind:success="onUploadSuccess"
-              bind:fail="onUploadFail"
-              bind:remove="onUploadRemove"
-              multiple="false"
-              max="1"
-              showUploadProgress
-              gridConfig="{column: 1}"
-              tips="仅支持1张图片，点击上传"
-            />
-          </t-cell>
-        </t-cell-group>
-        <t-cell-group title="效果图" wx:if="{{showEffect}}">
-          <t-cell>
-            <view class="effect-imgs">
-              <t-image src="{{effectImages.front}}" shape="round" class="effect-img"></t-image>
-              <t-image src="{{effectImages.side}}" shape="round" class="effect-img"></t-image>
-              <t-image src="{{effectImages.back}}" shape="round" class="effect-img"></t-image>
+    <!-- 上传照片区域 -->
+    <view class="card-section upload-section">
+      <view class="section-header">
+        <view class="section-title">上传照片</view>
+        <view class="section-subtitle">上传一张清晰的正面照片</view>
+      </view>
+      
+      <view class="upload-area {{hasUploadedImage ? 'has-image' : ''}}">
+        <t-upload
+          wx:if="{{!hasUploadedImage}}"
+          media-type="{{['image']}}"
+          files="{{uploadFiles}}"
+          bind:success="onUploadSuccess"
+          bind:remove="onUploadRemove"
+          bind:fail="onUploadFail"
+          config="{{uploadConfig}}"
+          max="1"
+          size-limit="{{2 * 1024 * 1024}}"
+        >
+          <view class="upload-button-wrapper">
+            <view class="upload-icon-wrapper">
+              <image src="/static/上传.png" class="custom-icon" mode="aspectFit"></image>
             </view>
-          </t-cell>
-        </t-cell-group>
-        <t-cell-group title="模型库">
-          <t-cell>
-            <view class="model-list">
-              <block wx:for="{{modelImages}}" wx:key="index">
-                <t-image src="{{item}}" shape="round" class="model-img"></t-image>
-              </block>
-            </view>
-          </t-cell>
-        </t-cell-group>
+            <view class="upload-text">点击上传照片</view>
+          </view>
+        </t-upload>
+        
+        <view wx:else class="uploaded-preview">
+          <t-image 
+            src="{{uploadFiles[0].url}}" 
+            mode="aspectFit" 
+            class="uploaded-image" 
+            bind:tap="previewImage"
+          />
+        </view>
+      </view>
+      
+      <!-- 删除按钮移到图片外部 -->
+      <view wx:if="{{hasUploadedImage}}" class="remove-button-container">
+        <t-button 
+          t-class="remove-button" 
+          theme="danger" 
+          variant="outline" 
+          size="small" 
+          bind:tap="onUploadRemove"
+        >
+          <image src="/static/删除.png" class="custom-icon-small" mode="aspectFit"></image>
+          删除照片
+        </t-button>
+      </view>
+      
+      <view class="upload-tips">
+        <image src="/static/帮助.png" class="custom-icon-small" mode="aspectFit"></image>
+        <text>请上传清晰的正面照片，以获得最佳效果</text>
       </view>
     </view>
-
-    <!-- 我的页面内容 -->
-    <view wx:if="{{tab === 'profile'}}">
-      <view class="td-card td-card-profile">
-        <view class="td-card-title">个人信息</view>
-        <view class="profile-info">
-          <t-image src="https://tdesign.gtimg.com/miniprogram/images/avatar1.png" shape="circle" class="profile-avatar"></t-image>
-          <view class="profile-text">
-            <view class="profile-nick">昵称：小猪</view>
-            <view class="profile-phone">手机号：138****8888</view>
+    
+    <!-- 模板选择区域 -->
+    <view class="card-section template-section">
+      <view class="section-header">
+        <view class="section-title">选择发型</view>
+        <view class="section-subtitle">试试不同的发型风格</view>
+      </view>
+      
+      <view class="gender-switch">
+        <t-button 
+          class="{{gender === 'male' ? 'active' : ''}}" 
+          theme="{{gender === 'male' ? 'primary' : 'default'}}" 
+          variant="{{gender === 'male' ? 'base' : 'outline'}}" 
+          size="medium" 
+          bind:tap="onGenderSwitch" 
+          data-gender="male"
+          t-class="gender-button"
+        >
+          男士发型
+        </t-button>
+        <t-button 
+          class="{{gender === 'female' ? 'active' : ''}}" 
+          theme="{{gender === 'female' ? 'primary' : 'default'}}" 
+          variant="{{gender === 'female' ? 'base' : 'outline'}}" 
+          size="medium" 
+          bind:tap="onGenderSwitch" 
+          data-gender="female"
+          t-class="gender-button"
+        >
+          女士发型
+        </t-button>
+      </view>
+      
+      <scroll-view scroll-x enable-flex class="template-scroll">
+        <view class="template-list">
+          <view 
+            wx:for="{{templates}}" 
+            wx:key="id" 
+            class="template-item {{selectedTemplateId === item.id ? 'selected' : ''}}"
+            bind:tap="onSelectTemplate"
+            data-id="{{item.id}}"
+          >
+            <view class="template-image-wrapper">
+              <t-image src="{{item.image}}" mode="aspectFill" class="template-image" />
+              <view wx:if="{{selectedTemplateId === item.id}}" class="selected-icon">
+                <image src="/static/选择.png" class="custom-icon" mode="aspectFit"></image>
+              </view>
+            </view>
+            <view class="template-name">{{item.name}}</view>
           </view>
         </view>
-        <t-button theme="primary" size="small" class="profile-btn">修改资料</t-button>
+      </scroll-view>
+    </view>
+    
+    <!-- 效果图展示区域 -->
+    <view class="card-section result-section {{showResult ? '' : 'hidden'}}">
+      <view class="section-header">
+        <view class="section-title">效果预览</view>
+        <view class="section-subtitle">查看不同角度的效果</view>
       </view>
-      <view class="td-card td-card-recharge">
-        <view class="td-card-title">积分与充值</view>
-        <view class="recharge-row">
-          <text>当前积分</text>
-          <text class="recharge-point">88</text>
-        </view>
-        <view class="recharge-packages">
-          <block wx:for="{{rechargePackages}}" wx:key="index">
-            <view class="recharge-package" bindtap="onRechargeSelect" data-index="{{index}}">
-              <view class="package-point">{{item.point}}</view>
-              <view class="package-label">积分</view>
-              <view class="package-price">￥{{item.price}}</view>
-            </view>
-          </block>
-        </view>
-        <t-button theme="success" size="small" class="recharge-btn">微信支付</t-button>
-      </view>
-      <view class="td-card td-card-setting">
-        <view class="td-card-title">通知设置</view>
-        <view class="setting-row">
-          <text>消息推送</text>
-          <t-switch checked="{{notifyPush}}" bind:change="onNotifyChange" />
+      
+      <t-tabs value="{{currentView}}" bind:change="onViewChange" t-class="custom-tabs">
+        <t-tab-panel label="正面" value="front" />
+        <t-tab-panel label="侧面" value="side" />
+        <t-tab-panel label="背面" value="back" />
+      </t-tabs>
+      
+      <view class="result-display">
+        <t-image 
+          wx:if="{{showResult}}"
+          src="{{resultImages[currentView]}}" 
+          mode="aspectFit" 
+          class="result-image"
+          bind:tap="previewResultImage"
+        />
+        <view wx:else class="no-result">
+          <image src="/static/帮助.png" class="custom-icon" mode="aspectFit"></image>
+          <text>请先上传照片并选择发型</text>
         </view>
       </view>
-      <view class="td-card td-card-setting">
-        <view class="td-card-title">账户设置</view>
-        <t-cell-group>
-          <t-cell title="修改手机号" arrow bindtap="onModifyPhone"></t-cell>
-          <t-cell title="退出登录" arrow theme="danger" bindtap="onLogout"></t-cell>
-          <t-cell title="帮助" arrow bindtap="onHelp"></t-cell>
-          <t-cell title="关于" arrow bindtap="onAbout"></t-cell>
-        </t-cell-group>
+      
+      <view class="result-info">
+        <view class="points-info">
+          <view class="points-item">
+            <image src="/static/积分.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>消耗积分：1</text>
+          </view>
+          <view class="points-item">
+            <image src="/static/钱包.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>剩余积分：{{userPoints}}</text>
+          </view>
+        </view>
+        <t-button 
+          theme="primary" 
+          size="small" 
+          bind:tap="onSaveImage"
+          disabled="{{!showResult}}"
+          t-class="save-button"
+        >
+          <image src="/static/保存.png" class="custom-icon-small" mode="aspectFit"></image>
+          保存
+        </t-button>
       </view>
     </view>
-
-    <!-- 上传与模板选择弹窗 -->
-    <t-dialog visible="{{showDialog}}" title="上传与模板选择" bind:close="onDialogClose">
-      <view class="dialog-content">
-        <t-upload
-          files="{{dialogUploadFiles}}"
-          bind:success="onDialogUploadSuccess"
-          bind:fail="onDialogUploadFail"
-          bind:remove="onDialogUploadRemove"
-          multiple="false"
-          max="1"
-          showUploadProgress
-          gridConfig="{column: 1}"
-          tips="仅支持1张图片，点击上传"
-        />
-        <view class="dialog-model-list">
-          <block wx:for="{{modelImages}}" wx:key="index">
-            <t-image src="{{item}}" shape="round" class="model-img"></t-image>
-          </block>
-        </view>
-      </view>
-    </t-dialog>
-
+    
+    <!-- 生成按钮 - 移到页面内容中 -->
+    <view class="card-section action-section">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        loading="{{isGenerating}}"
+        disabled="{{!canGenerate}}"
+        bind:tap="onGenerate"
+        t-class="generate-button"
+      >
+        {{isGenerating ? '生成中...' : '生成发型效果'}}
+      </t-button>
+    </view>
+    
+    <!-- 添加占位区域，确保内容不被底部按钮遮挡 -->
+    <view class="bottom-space"></view>
   </view>
-</scroll-view>
+</view>
 
-<t-back-top theme="round" text="顶部"></t-back-top>
+<!-- 弹窗 -->
+<t-dialog
+  visible="{{showPointsDialog}}"
+  title="积分不足"
+  content="您的积分不足，无法生成效果图，是否前往充值页面？"
+  confirm-btn="去充值"
+  cancel-btn="取消"
+  bind:confirm="onGoToRecharge"
+  bind:cancel="onClosePointsDialog"
+/>
+
+<t-toast id="t-toast" />
+<t-back-top theme="round" text="顶部" />

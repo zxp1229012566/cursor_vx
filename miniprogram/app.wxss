@@ -9,9 +9,18 @@
   box-sizing: border-box;
 } 
 
+/* 覆盖TDesign的字体设置，使用本地字体文件 */
 @font-face {
   font-family: 't';
   src: url('/static/fonts/t.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 } 
+
+/* 覆盖TDesign图标字体的网络引用 */
+.t-icon {
+  font-family: 't' !important;
+}
+
+/* 引入自定义图标样式 */
+@import './custom-icon.wxss';

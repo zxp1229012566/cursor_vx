@@ -1,40 +1,396 @@
 /**index.wxss**/
-.page {
-  background: #f7f8fa;
-  min-height: 100vh;
-  padding: 24rpx 24rpx 0 24rpx;
-  padding-bottom: 120rpx;
-}
-.section {
-  margin-bottom: 48rpx;
-}
-.effect-title, .model-title {
-  font-size: 32rpx;
-  font-weight: 600;
-  margin-bottom: 16rpx;
-  color: #222;
-}
-.effect-list {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16rpx;
-}
-.effect-img {
-  width: 160rpx;
-  height: 200rpx;
-  border-radius: 24rpx;
-  background: #f5e9da;
-}
-.model-img {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 16rpx;
-  background: #f5e9da;
+page {
+  background-color: #F8F9FC;
+  font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
 }
 
-.scrollarea {
+.page-wrapper {
+  min-height: 100vh;
+  padding-bottom: 160rpx;
+  box-sizing: border-box;
+}
+
+/* 页面头部样式 */
+.page-header {
+  background: transparent;
+  padding: 40rpx 30rpx;
+  color: #333;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 放大logo */
+.header-logo {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 16rpx;
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.container {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 自定义图标样式 */
+.custom-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.custom-icon-small {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 卡片部分通用样式 */
+.card-section {
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  align-self: flex-start;
+}
+
+.card-section:hover {
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+  transform: translateY(-2rpx);
+}
+
+.section-header {
+  margin-bottom: 24rpx;
+  text-align: left;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8rpx;
+  position: relative;
+  padding-left: 20rpx;
+  text-align: left;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6rpx;
+  height: 32rpx;
+  width: 8rpx;
+  background: linear-gradient(to bottom, #4080FF, #6A36FF);
+  border-radius: 4rpx;
+}
+
+.section-subtitle {
+  font-size: 24rpx;
+  color: #999999;
+  padding-left: 20rpx;
+  text-align: left;
+}
+
+/* 上传区域样式 */
+.upload-area {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 320rpx;
+  background-color: #F5F7FA;
+  border-radius: 16rpx;
+  position: relative;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding-left: 30rpx;
+}
+
+.upload-area.has-image {
+  background-color: #F0F0F0;
+}
+
+.upload-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transition: transform 0.3s ease;
+}
+
+.upload-button-wrapper:active {
+  transform: scale(0.95);
+}
+
+.upload-icon-wrapper {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: rgba(64, 128, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.upload-text {
+  font-size: 28rpx;
+  color: #4080FF;
+}
+
+.uploaded-preview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+/* 删除按钮样式 - 移到图片外部 */
+.remove-button-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.remove-button {
+  border-radius: 30rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8rpx !important;
+  transition: all 0.3s ease !important;
+}
+
+.upload-tips {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 10rpx;
+}
+
+/* 模板选择区域样式 */
+.gender-switch {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.gender-button {
+  min-width: 180rpx !important;
+  border-radius: 30rpx !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.template-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.template-list {
+  display: inline-flex;
+  padding: 10rpx 0;
+}
+
+.template-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 30rpx;
+  padding: 10rpx;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+  width: 180rpx;
+}
+
+.template-item.selected {
+  background-color: rgba(64, 128, 255, 0.1);
+  transform: translateY(-5rpx);
+}
+
+.template-image-wrapper {
+  position: relative;
+  width: 160rpx;
+  height: 200rpx;
+  margin-bottom: 10rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.template-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+  transition: transform 0.3s ease;
+}
+
+.template-item:active .template-image {
+  transform: scale(0.95);
+}
+
+.selected-icon {
+  position: absolute;
+  right: 8rpx;
+  bottom: 8rpx;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-name {
+  font-size: 24rpx;
+  color: #333333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: left;
+}
+
+/* 效果图展示区域样式 */
+.result-section.hidden {
+  display: none;
+}
+
+.custom-tabs {
+  margin-bottom: 20rpx;
+}
+
+.result-display {
+  width: 100%;
+  height: 600rpx;
+  background-color: #F5F7FA;
+  border-radius: 16rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  box-shadow: inset 0 0 10rpx rgba(0, 0, 0, 0.05);
+  padding-left: 20rpx;
+}
+
+.result-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+  transition: transform 0.5s ease;
+}
+
+.result-image:active {
+  transform: scale(0.98);
+}
+
+.no-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20rpx;
+  color: #999999;
+  padding-left: 20rpx;
+}
+
+.result-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.points-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
   flex: 1;
-  overflow-y: hidden;
+}
+
+.points-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 28rpx;
+  color: #666666;
+  text-align: left;
+}
+
+.save-button {
+  border-radius: 30rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8rpx !important;
+  transition: all 0.3s ease !important;
+  margin-left: 30rpx;
+  min-width: 120rpx !important;
+}
+
+/* 底部空间，确保内容不被底部按钮遮挡 */
+.bottom-space {
+  height: 120rpx;
+}
+
+/* 生成按钮区域 - 调整为内容中的卡片 */
+.action-section {
+  padding: 30rpx;
+  background: linear-gradient(135deg, rgba(64, 128, 255, 0.05) 0%, rgba(106, 54, 255, 0.05) 100%);
+  border: 2rpx dashed rgba(64, 128, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.action-section:hover {
+  background: linear-gradient(135deg, rgba(64, 128, 255, 0.1) 0%, rgba(106, 54, 255, 0.1) 100%);
+}
+
+.generate-button {
+  border-radius: 40rpx !important;
+  background: linear-gradient(135deg, #4080FF 0%, #6A36FF 100%) !important;
+  height: 90rpx !important;
+  font-size: 32rpx !important;
+  box-shadow: 0 6rpx 20rpx rgba(64, 128, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.generate-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 3rpx 10rpx rgba(64, 128, 255, 0.2) !important;
+}
+
+.index-page {
+  padding-bottom: 60rpx;
 }
 
 .userinfo {

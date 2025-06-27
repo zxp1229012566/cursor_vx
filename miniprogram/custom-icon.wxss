@@ -1,0 +1,22 @@
+/* 覆盖TDesign的字体设置，使用本地字体文件 */
+@font-face {
+  font-family: 't';
+  src: url('/static/fonts/t.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.t-icon {
+  font-family: 't' !important;
+}
+
+/* 添加通用图标类 */
+.custom-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.custom-icon-small {
+  width: 32rpx;
+  height: 32rpx;
+} 

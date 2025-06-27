@@ -1,19 +1,97 @@
-<view class="page">
-  <t-notice-bar content="每次生成消耗1积分" theme="info" />
-  <view wx:if="{{loading}}" class="loading-box">
-    <t-loading size="40rpx" text="正在生成效果图..." layout="vertical" />
+<view class="page-wrapper">
+  <!-- 页面顶部 -->
+  <view class="page-header">
+    <view class="header-content">
+      <image class="header-logo" src="/static/logo.png" mode="aspectFit"></image>
+      <view class="header-title">效果预览</view>
+    </view>
   </view>
-  <view wx:elif="{{showResult}}" class="result-box">
-    <t-card title="发型合成效果" bordered>
-      <view class="effect-img-wrap">
-        <t-image src="{{effectImg}}" shape="round" class="effect-img" />
+  
+  <view class="container">
+    <!-- 提示信息 -->
+    <view class="notice-bar">
+      <image src="/static/积分.png" class="custom-icon" mode="aspectFit"></image>
+      <text>每次生成效果图消耗1积分</text>
+    </view>
+    
+    <!-- 加载中状态 -->
+    <view wx:if="{{loading}}" class="loading-container">
+      <view class="loading-animation">
+        <t-loading theme="circular" size="80rpx" text="正在生成您的发型效果..." layout="vertical" />
       </view>
-      <view class="btn-group">
-        <t-button theme="primary" shape="round" block bind:tap="onSave">保存到相册</t-button>
+      <view class="loading-tips">
+        <text>AI正在处理您的照片，请稍候...</text>
       </view>
-    </t-card>
-  </view>
-  <view class="btn-group">
-    <t-button theme="default" shape="round" block bind:tap="onBack">返回首页</t-button>
+    </view>
+    
+    <!-- 结果展示 -->
+    <block wx:elif="{{showResult}}">
+      <view class="card-section result-section">
+        <view class="section-header">
+          <view class="section-title">发型效果</view>
+          <view class="section-subtitle">您的专属发型效果已生成</view>
+        </view>
+        
+        <view class="result-display">
+          <t-image 
+            src="{{effectImg}}" 
+            mode="aspectFit" 
+            class="result-image"
+            bind:tap="previewImage"
+          />
+        </view>
+        
+        <view class="result-actions">
+          <t-button 
+            theme="primary" 
+            size="large" 
+            block 
+            bind:tap="onSave"
+            t-class="save-button"
+          >
+            <image src="/static/保存.png" class="custom-icon" mode="aspectFit"></image>
+            保存到相册
+          </t-button>
+          
+          <view class="action-tips">
+            <image src="/static/帮助.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>图片已保存至您的相册中</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="card-section share-section">
+        <view class="section-header">
+          <view class="section-title">分享效果</view>
+          <view class="section-subtitle">与朋友分享您的新发型</view>
+        </view>
+        
+        <view class="share-buttons">
+          <t-button theme="primary" variant="outline" size="large" t-class="share-button">
+            <image src="/static/分享.png" class="custom-icon" mode="aspectFit"></image>
+            分享给朋友
+          </t-button>
+          
+          <t-button theme="primary" variant="outline" size="large" t-class="share-button">
+            <image src="/static/图片.png" class="custom-icon" mode="aspectFit"></image>
+            生成分享图
+          </t-button>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 返回按钮 -->
+    <view class="action-area">
+      <t-button 
+        theme="default" 
+        size="large" 
+        block 
+        bind:tap="onBack"
+        t-class="back-button"
+      >
+        <image src="/static/返回.png" class="custom-icon" mode="aspectFit"></image>
+        返回首页
+      </t-button>
+    </view>
   </view>
 </view> 

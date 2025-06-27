@@ -1,32 +1,110 @@
-<view class="help-container">
-  <view class="help-title">常见问题与帮助</view>
-  <view class="help-list">
-    <view class="help-item">
-      <view class="help-q">Q: 如何上传照片？</view>
-      <view class="help-a">A: 在首页点击上传按钮，选择照片即可。</view>
-    </view>
-    <view class="help-item">
-      <view class="help-q">Q: 如何查看效果图？</view>
-      <view class="help-a">A: 上传照片后会自动生成正面、侧面、背面效果图。</view>
-    </view>
-    <view class="help-item">
-      <view class="help-q">Q: 如何充值积分？</view>
-      <view class="help-a">A: 在"我的"页面选择充值套餐，点击微信支付即可。</view>
-    </view>
-    <view class="help-item">
-      <view class="help-q">Q: 模型库图片如何更换？</view>
-      <view class="help-a">A: 上传新图片后会自动加入模型库。</view>
+<view class="page-wrapper">
+  <!-- 页面顶部 -->
+  <view class="page-header">
+    <view class="header-content">
+      <image class="header-logo" src="/static/logo.png" mode="aspectFit"></image>
+      <view class="header-title">帮助中心</view>
     </view>
   </view>
-  <view class="about-section">
-    <view class="about-title">关于本小程序</view>
-    <view class="about-desc">
-      本产品为发型AI效果小程序，提供照片上传、AI发型生成、模型库管理、积分充值等功能。
+  
+  <view class="container">
+    <!-- 常见问题部分 -->
+    <view class="card-section faq-section">
+      <view class="section-header">
+        <view class="section-title">常见问题</view>
+        <view class="section-subtitle">解答您可能遇到的问题</view>
+      </view>
+      
+      <view class="faq-list">
+        <view class="faq-item">
+          <view class="faq-question">
+            <image src="/static/帮助.png" class="custom-icon" mode="aspectFit"></image>
+            <text>如何上传照片？</text>
+          </view>
+          <view class="faq-answer">
+            <image src="/static/右箭头.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>在首页点击上传按钮，选择照片即可。支持从相册选择或直接拍照上传。</text>
+          </view>
+        </view>
+        
+        <view class="faq-item">
+          <view class="faq-question">
+            <image src="/static/帮助.png" class="custom-icon" mode="aspectFit"></image>
+            <text>如何查看效果图？</text>
+          </view>
+          <view class="faq-answer">
+            <image src="/static/右箭头.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>上传照片并选择发型后，点击"生成发型效果"按钮，系统会自动生成正面、侧面、背面效果图。</text>
+          </view>
+        </view>
+        
+        <view class="faq-item">
+          <view class="faq-question">
+            <image src="/static/帮助.png" class="custom-icon" mode="aspectFit"></image>
+            <text>如何充值积分？</text>
+          </view>
+          <view class="faq-answer">
+            <image src="/static/右箭头.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>在"我的"页面选择充值套餐，点击微信支付即可完成积分充值。</text>
+          </view>
+        </view>
+        
+        <view class="faq-item">
+          <view class="faq-question">
+            <image src="/static/帮助.png" class="custom-icon" mode="aspectFit"></image>
+            <text>模型库图片如何更换？</text>
+          </view>
+          <view class="faq-answer">
+            <image src="/static/右箭头.png" class="custom-icon-small" mode="aspectFit"></image>
+            <text>上传新图片后会自动加入模型库，您可以在首页的发型模板库中选择使用。</text>
+          </view>
+        </view>
+      </view>
     </view>
-    <view class="about-info">
-      <view>版本号：1.0.0</view>
-      <view>产品支持：support@example.com</view>
+    
+    <!-- 关于部分 -->
+    <view class="card-section about-section">
+      <view class="section-header">
+        <view class="section-title">关于我们</view>
+        <view class="section-subtitle">了解更多产品信息</view>
+      </view>
+      
+      <view class="about-content">
+        <view class="about-desc">
+          本产品为发型AI效果小程序，提供照片上传、AI发型生成、模型库管理、积分充值等功能。帮助您在理发前预览不同发型效果，做出更好的选择。
+        </view>
+        
+        <view class="about-info">
+          <view class="info-item">
+            <image src="/static/版本.png" class="custom-icon" mode="aspectFit"></image>
+            <text>版本号：1.0.0</text>
+          </view>
+          <view class="info-item">
+            <image src="/static/邮件.png" class="custom-icon" mode="aspectFit"></image>
+            <text>产品支持：support@example.com</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 联系我们 -->
+    <view class="card-section contact-section">
+      <view class="section-header">
+        <view class="section-title">联系我们</view>
+        <view class="section-subtitle">获取更多帮助</view>
+      </view>
+      
+      <view class="contact-content">
+        <t-button theme="primary" size="large" block t-class="contact-button">
+          <image src="/static/客服.png" class="custom-icon" mode="aspectFit"></image>
+          在线客服
+        </t-button>
+        <view class="contact-tips">
+          工作时间：周一至周五 9:00-18:00
+        </view>
+      </view>
     </view>
   </view>
+  
   <t-back-top theme="round" text="顶部"></t-back-top>
 </view> 

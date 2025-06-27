@@ -1,58 +1,204 @@
-.help-container {
-  width: 393px;
-  margin: 0 auto;
-  padding: 24px 18px 0 18px;
-  background: #f9fafb;
-  min-height: 804px;
+page {
+  background-color: #F8F9FC;
+  font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
 }
-.help-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0052d9;
-  margin-bottom: 18px;
+
+.page-wrapper {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+  box-sizing: border-box;
 }
-.help-list {
+
+/* 页面头部样式 */
+.page-header {
+  background: transparent;
+  padding: 20rpx 30rpx;
+  color: #333;
+  position: relative;
+  margin-bottom: 10rpx;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 放大logo */
+.header-logo {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 16rpx;
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.container {
+  padding: 20rpx 30rpx;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  align-items: flex-start;
 }
-.help-item {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px 0 #e5e7eb33;
-  border: 1.5px solid #f5e9da;
-  padding: 16px 14px;
+
+/* 自定义图标样式 */
+.custom-icon {
+  width: 40rpx;
+  height: 40rpx;
 }
-.help-q {
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 6px;
+
+.custom-icon-small {
+  width: 32rpx;
+  height: 32rpx;
 }
-.help-a {
-  color: #666;
-  font-size: 15px;
+
+/* 卡片部分通用样式 */
+.card-section {
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  align-self: flex-start;
 }
-.about-section {
-  margin-top: 32px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px 0 #e5e7eb33;
-  border: 1.5px solid #f5e9da;
-  padding: 20px 14px;
+
+.card-section:hover {
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+  transform: translateY(-2rpx);
 }
-.about-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #0052d9;
-  margin-bottom: 12px;
+
+.section-header {
+  margin-bottom: 24rpx;
+  text-align: left;
 }
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8rpx;
+  position: relative;
+  padding-left: 20rpx;
+  text-align: left;
+}
+
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6rpx;
+  height: 32rpx;
+  width: 8rpx;
+  background: linear-gradient(to bottom, #4080FF, #6A36FF);
+  border-radius: 4rpx;
+}
+
+.section-subtitle {
+  font-size: 24rpx;
+  color: #999999;
+  padding-left: 20rpx;
+  text-align: left;
+}
+
+/* FAQ部分样式 */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.faq-item {
+  background-color: #F8F9FC;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  background-color: #F0F4FF;
+  transform: translateY(-2rpx);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 16rpx;
+  text-align: left;
+}
+
+.faq-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #666666;
+  padding-left: 8rpx;
+  text-align: left;
+}
+
+/* 关于部分样式 */
+.about-content {
+  padding: 10rpx;
+}
+
 .about-desc {
-  font-size: 16px;
-  color: #444;
-  margin-bottom: 18px;
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 30rpx;
+  text-align: left;
 }
+
 .about-info {
-  font-size: 15px;
-  color: #666;
-  line-height: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #666666;
+  text-align: left;
+}
+
+/* 联系我们部分样式 */
+.contact-content {
+  padding: 10rpx;
+  text-align: left;
+}
+
+.contact-button {
+  border-radius: 40rpx !important;
+  background: linear-gradient(135deg, #4080FF 0%, #6A36FF 100%) !important;
+  height: 90rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10rpx !important;
+  transition: all 0.3s ease !important;
+  padding-left: 30rpx !important;
+}
+
+.contact-button:active {
+  transform: scale(0.98);
+}
+
+.contact-tips {
+  font-size: 24rpx;
+  color: #999999;
+  text-align: left;
+  margin-top: 20rpx;
+  padding-left: 10rpx;
 } 

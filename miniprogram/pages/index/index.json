@@ -9,8 +9,14 @@
         "t-switch": "tdesign-miniprogram/switch/switch",
         "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
         "t-cell": "tdesign-miniprogram/cell/cell",
-        "t-back-top": "tdesign-miniprogram/back-top/back-top"
+        "t-back-top": "tdesign-miniprogram/back-top/back-top",
+        "t-tabs": "tdesign-miniprogram/tabs/tabs",
+        "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+        "t-loading": "tdesign-miniprogram/loading/loading",
+        "t-toast": "tdesign-miniprogram/toast/toast",
+        "t-icon": "tdesign-miniprogram/icon/icon"
     },
-    "navigationBarTitleText": "首页",
-    "navigationStyle": "default"
+    "navigationBarTitleText": "发型试戴",
+    "navigationStyle": "default",
+    "styleIsolation": "apply-shared"
 }
