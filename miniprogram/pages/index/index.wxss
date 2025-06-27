@@ -1,9 +1,37 @@
 /**index.wxss**/
-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+.page {
+  background: #f7f8fa;
+  min-height: 100vh;
+  padding: 24rpx 24rpx 0 24rpx;
+  padding-bottom: 120rpx;
 }
+.section {
+  margin-bottom: 48rpx;
+}
+.effect-title, .model-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  color: #222;
+}
+.effect-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+.effect-img {
+  width: 160rpx;
+  height: 200rpx;
+  border-radius: 24rpx;
+  background: #f5e9da;
+}
+.model-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  background: #f5e9da;
+}
+
 .scrollarea {
   flex: 1;
   overflow-y: hidden;
@@ -61,6 +89,7 @@ page {
   flex: 1;
 }
 
+<<<<<<< HEAD
 /* TDesign风格主色、辅助色 */
 :root {
   --td-main: #0052d9;
@@ -297,4 +326,60 @@ page {
 .tabbar-plus-inner t-icon {
   font-size: 40rpx;
   color: #fff;
+=======
+.custom-tabbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100rpx;
+  background: #fff;
+  border-top: 2rpx solid #f5e9da;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 100;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  color: #64748b;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  border-right: 1rpx solid #f5e9da;
+  border-left: 1rpx solid #f5e9da;
+  background: #fff;
+}
+.tab-item:first-child {
+  border-left: none;
+}
+.tab-item:last-child {
+  border-right: none;
+}
+.tab-item.active {
+  color: #0052d9;
+  font-weight: 600;
+  background: #f5e9da22;
+  border-radius: 16rpx;
+}
+.fab-btn {
+  width: 88rpx;
+  height: 88rpx;
+  background: linear-gradient(135deg, #0052d9 60%, #36b37e 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.18);
+  color: #fff;
+  font-size: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -32rpx;
+  border: 4rpx solid #f5e9da;
+  z-index: 101;
+>>>>>>> 18cde87adc841a12d29663b9f8d821e9d6f363e2
 }

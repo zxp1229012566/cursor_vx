@@ -1,0 +1,18 @@
+<view class="page">
+  <t-cell-group title="当前积分">
+    <t-cell>
+      <view slot="right" class="score-badge">88</view>
+    </t-cell>
+  </t-cell-group>
+  <t-cell-group title="选择充值套餐">
+    <view class="recharge-list">
+      <t-card wx:for="{{rechargeList}}" wx:key="index" class="recharge-card" hoverable bind:tap="onSelect" data-index="{{index}}">
+        <view class="recharge-amount">{{item.amount}} 积分</view>
+        <view class="recharge-price">￥{{item.price}}</view>
+      </t-card>
+    </view>
+  </t-cell-group>
+  <view class="btn-group">
+    <t-button theme="success" block shape="round" bind:tap="onPay">微信支付</t-button>
+  </view>
+</view> 

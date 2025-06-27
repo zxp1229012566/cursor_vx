@@ -1,0 +1,19 @@
+<view class="page">
+  <t-notice-bar content="每次生成消耗1积分" theme="info" />
+  <view wx:if="{{loading}}" class="loading-box">
+    <t-loading size="40rpx" text="正在生成效果图..." layout="vertical" />
+  </view>
+  <view wx:elif="{{showResult}}" class="result-box">
+    <t-card title="发型合成效果" bordered>
+      <view class="effect-img-wrap">
+        <t-image src="{{effectImg}}" shape="round" class="effect-img" />
+      </view>
+      <view class="btn-group">
+        <t-button theme="primary" shape="round" block bind:tap="onSave">保存到相册</t-button>
+      </view>
+    </t-card>
+  </view>
+  <view class="btn-group">
+    <t-button theme="default" shape="round" block bind:tap="onBack">返回首页</t-button>
+  </view>
+</view> 

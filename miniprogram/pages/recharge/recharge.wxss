@@ -1,0 +1,38 @@
+.page {
+  background: #f7f8fa;
+  min-height: 100vh;
+  padding: 24rpx 0 0 0;
+}
+.score-badge {
+  background: #e6f0ff;
+  color: #0052d9;
+  border-radius: 16rpx;
+  padding: 4rpx 20rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.recharge-list {
+  display: flex;
+  gap: 24rpx;
+  margin: 24rpx 0;
+  justify-content: space-between;
+}
+.recharge-card {
+  flex: 1;
+  text-align: center;
+  border-radius: 20rpx;
+  padding: 24rpx 0;
+}
+.recharge-amount {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #0052d9;
+  margin-bottom: 8rpx;
+}
+.recharge-price {
+  font-size: 26rpx;
+  color: #888;
+}
+.btn-group {
+  margin: 48rpx 24rpx 0 24rpx;
+} 

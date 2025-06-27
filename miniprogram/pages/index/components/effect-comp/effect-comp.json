@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-card": "tdesign-miniprogram/card/card",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-button": "tdesign-miniprogram/button/button"
+  }
+} 
