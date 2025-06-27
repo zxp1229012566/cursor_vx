@@ -1,46 +1,38 @@
-<view class="container">
-  <view class="td-card td-card-profile">
-    <view class="td-card-title">个人信息</view>
-    <view class="profile-info">
-      <t-image src="https://tdesign.gtimg.com/miniprogram/images/avatar1.png" shape="circle" class="profile-avatar"></t-image>
-      <view class="profile-text">
-        <view class="profile-nick">昵称：小猪</view>
-        <view class="profile-phone">手机号：138****8888</view>
-      </view>
-    </view>
-    <t-button theme="primary" size="small" class="profile-btn">修改资料</t-button>
-  </view>
-  <view class="td-card td-card-recharge">
-    <view class="td-card-title">积分与充值</view>
-    <view class="recharge-row">
-      <text>当前积分</text>
-      <text class="recharge-point">88</text>
-    </view>
-    <view class="recharge-packages">
-      <block wx:for="{{rechargePackages}}" wx:key="index">
-        <view class="recharge-package" bindtap="onRechargeSelect" data-index="{{index}}">
-          <view class="package-point">{{item.point}}</view>
-          <view class="package-label">积分</view>
-          <view class="package-price">￥{{item.price}}</view>
+<view class="profile-page">
+  <t-cell-group title="个人信息">
+    <t-cell>
+      <view slot="title" class="profile-header">
+        <t-avatar image="/static/me.png" size="large" />
+        <view class="profile-info">
+          <view class="profile-nick">昵称：小猪</view>
+          <view class="profile-phone">手机号：138****8888</view>
         </view>
-      </block>
-    </view>
-    <t-button theme="success" size="small" class="recharge-btn">微信支付</t-button>
-  </view>
-  <view class="td-card td-card-setting">
-    <view class="td-card-title">通知设置</view>
-    <view class="setting-row">
-      <text>消息推送</text>
-      <t-switch checked="{{notifyPush}}" bind:change="onNotifyChange" />
-    </view>
-  </view>
-  <view class="td-card td-card-setting">
-    <view class="td-card-title">账户设置</view>
-    <t-cell-group>
-      <t-cell title="修改手机号" arrow bindtap="onModifyPhone"></t-cell>
-      <t-cell title="退出登录" arrow theme="danger" bindtap="onLogout"></t-cell>
-      <t-cell title="帮助" arrow bindtap="onHelp"></t-cell>
-    </t-cell-group>
-  </view>
+      </view>
+      <t-button slot="right" size="small" theme="primary" shape="round" bind:tap="onChooseAvatar">修改资料</t-button>
+    </t-cell>
+  </t-cell-group>
+  <t-cell-group title="积分与充值">
+    <t-cell title="当前积分">
+      <view slot="right" class="score-badge">88</view>
+    </t-cell>
+    <t-cell title="充值套餐">
+      <view slot="right" class="recharge-group">
+        <t-tag theme="primary" variant="light" class="recharge-tag">10积分 ￥6</t-tag>
+        <t-tag theme="primary" variant="light" class="recharge-tag">30积分 ￥16</t-tag>
+        <t-tag theme="primary" variant="light" class="recharge-tag">100积分 ￥48</t-tag>
+      </view>
+    </t-cell>
+    <t-cell>
+      <t-button theme="success" block shape="round" bind:tap="onPay">微信支付</t-button>
+    </t-cell>
+  </t-cell-group>
+  <t-cell-group title="设置">
+    <t-cell title="消息推送">
+      <t-switch slot="right" checked="{{notifyPush}}" bind:change="onNotifyChange" />
+    </t-cell>
+    <t-cell title="修改手机号" arrow bind:tap="onModifyPhone" />
+    <t-cell title="退出登录" arrow bind:tap="onLogout" />
+    <t-cell title="帮助" arrow bind:tap="onHelp" />
+  </t-cell-group>
   <t-back-top theme="round" text="顶部"></t-back-top>
 </view> 

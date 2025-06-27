@@ -1,38 +1,42 @@
 <!--index.wxml-->
-<<<<<<< HEAD
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
     <!-- 首页内容 -->
     <view wx:if="{{tab === 'home'}}">
-      <view class="td-card td-card-upload">
-        <view class="td-card-title">上传照片</view>
-        <t-upload
-          files="{{uploadFiles}}"
-          bind:success="onUploadSuccess"
-          bind:fail="onUploadFail"
-          bind:remove="onUploadRemove"
-          multiple="false"
-          max="1"
-          showUploadProgress
-          gridConfig="{column: 1}"
-          tips="仅支持1张图片，点击上传"
-        />
-      </view>
-      <view class="td-card td-card-effect" wx:if="{{showEffect}}">
-        <view class="td-card-title">效果图</view>
-        <view class="effect-imgs">
-          <t-image src="{{effectImages.front}}" shape="round" class="effect-img"></t-image>
-          <t-image src="{{effectImages.side}}" shape="round" class="effect-img"></t-image>
-          <t-image src="{{effectImages.back}}" shape="round" class="effect-img"></t-image>
-        </view>
-      </view>
-      <view class="td-card td-card-models">
-        <view class="td-card-title">模型库</view>
-        <view class="model-list">
-          <block wx:for="{{modelImages}}" wx:key="index">
-            <t-image src="{{item}}" shape="round" class="model-img"></t-image>
-          </block>
-        </view>
+      <view class="index-page">
+        <t-cell-group title="上传照片">
+          <t-cell>
+            <t-upload
+              files="{{uploadFiles}}"
+              bind:success="onUploadSuccess"
+              bind:fail="onUploadFail"
+              bind:remove="onUploadRemove"
+              multiple="false"
+              max="1"
+              showUploadProgress
+              gridConfig="{column: 1}"
+              tips="仅支持1张图片，点击上传"
+            />
+          </t-cell>
+        </t-cell-group>
+        <t-cell-group title="效果图" wx:if="{{showEffect}}">
+          <t-cell>
+            <view class="effect-imgs">
+              <t-image src="{{effectImages.front}}" shape="round" class="effect-img"></t-image>
+              <t-image src="{{effectImages.side}}" shape="round" class="effect-img"></t-image>
+              <t-image src="{{effectImages.back}}" shape="round" class="effect-img"></t-image>
+            </view>
+          </t-cell>
+        </t-cell-group>
+        <t-cell-group title="模型库">
+          <t-cell>
+            <view class="model-list">
+              <block wx:for="{{modelImages}}" wx:key="index">
+                <t-image src="{{item}}" shape="round" class="model-img"></t-image>
+              </block>
+            </view>
+          </t-cell>
+        </t-cell-group>
       </view>
     </view>
 
@@ -110,66 +114,3 @@
 </scroll-view>
 
 <t-back-top theme="round" text="顶部"></t-back-top>
-=======
-<view class="page">
-  <!-- 首页Tab -->
-  <view wx:if="{{activeTab === 'home'}}">
-    <!-- 上传区域 -->
-    <view class="section">
-      <t-uploader
-        files="{{files}}"
-        max="1"
-        bind:select="onSelect"
-        bind:remove="onRemove"
-        bind:success="onUploadSuccess"
-        bind:fail="onUploadFail"
-        tips="请上传正面照片"
-        showUploadProgress
-      />
-    </view>
-
-    <!-- 效果图展示 -->
-    <view class="section" wx:if="{{showEffect}}">
-      <view class="effect-title">效果图预览</view>
-      <view class="effect-list">
-        <t-image src="{{effectFront}}" shape="round" class="effect-img" />
-        <t-image src="{{effectSide}}" shape="round" class="effect-img" />
-        <t-image src="{{effectBack}}" shape="round" class="effect-img" />
-      </view>
-    </view>
-
-    <!-- 模型库 -->
-    <view class="section">
-      <view class="model-title">模型库</view>
-      <t-grid column="3">
-        <t-grid-item wx:for="{{modelList}}" wx:key="index">
-          <t-image src="{{item}}" shape="round" class="model-img" />
-        </t-grid-item>
-      </t-grid>
-    </view>
-  </view>
-
-  <!-- 个人中心Tab -->
-  <view wx:if="{{activeTab === 'profile'}}">
-    <profile-comp />
-  </view>
-
-  <!-- 悬浮+按钮弹窗，内容为effect页面 -->
-  <t-dialog visible="{{showEffectDialog}}" title="上传与模板选择" showOverlay bind:close="onCloseEffectDialog">
-    <effect-comp bind:close="onCloseEffectDialog" />
-  </t-dialog>
-
-  <!-- 自定义底部TabBar -->
-  <view class="custom-tabbar">
-    <view class="tab-item {{activeTab === 'home' ? 'active' : ''}}" bindtap="switchTab" data-tab="home">
-      <t-icon name="home" size="32rpx" />
-      <text>首页</text>
-    </view>
-    <view class="fab-btn" bindtap="openEffectDialog">+</view>
-    <view class="tab-item {{activeTab === 'profile' ? 'active' : ''}}" bindtap="switchTab" data-tab="profile">
-      <t-icon name="user" size="32rpx" />
-      <text>我的</text>
-    </view>
-  </view>
-</view>
->>>>>>> 18cde87adc841a12d29663b9f8d821e9d6f363e2

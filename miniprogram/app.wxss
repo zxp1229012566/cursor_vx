@@ -10,7 +10,7 @@
 } 
 
 @font-face {
-  font-family: 't-icon';
+  font-family: 't';
   src: url('/static/fonts/t.woff') format('woff');
   font-weight: normal;
   font-style: normal;

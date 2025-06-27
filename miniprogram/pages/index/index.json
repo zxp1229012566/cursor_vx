@@ -1,6 +1,5 @@
 {
     "usingComponents": {
-<<<<<<< HEAD
         "t-tabbar": "tdesign-miniprogram/tab-bar/tab-bar",
         "t-tabbar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
         "t-button": "tdesign-miniprogram/button/button",
@@ -14,17 +13,4 @@
     },
     "navigationBarTitleText": "首页",
     "navigationStyle": "default"
-=======
-        "t-button": "tdesign-miniprogram/button/button",
-        "t-uploader": "tdesign-miniprogram/uploader/uploader",
-        "t-image": "tdesign-miniprogram/image/image",
-        "t-grid": "tdesign-miniprogram/grid/grid",
-        "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
-        "t-dialog": "tdesign-miniprogram/dialog/dialog",
-        "t-icon": "tdesign-miniprogram/icon/icon",
-        "profile-comp": "./components/profile-comp/profile-comp",
-        "effect-comp": "./components/effect-comp/effect-comp"
-    },
-    "navigationBarTitleText": "首页"
->>>>>>> 18cde87adc841a12d29663b9f8d821e9d6f363e2
 }

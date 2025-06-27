@@ -1,7 +1,7 @@
 // index.ts
 // 获取应用实例
 const app = getApp<IAppOption>()
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+const defaultAvatarUrl = '/static/me.png'
 
 Page({
   data: {
@@ -34,22 +34,10 @@ Page({
     hasUserInfo: false,
     canIUseGetUserProfile: wx.canIUse('getUserProfile'),
     canIUseNicknameComp: wx.canIUse('input.type.nickname'),
-    files: [],
-    showEffect: false,
-    effectFront: '',
-    effectSide: '',
-    effectBack: '',
-    modelList: [
-      '/static/hair1.png',
-      '/static/hair2.png',
-      '/static/hair3.png'
-    ],
-    activeTab: 'home',
-    showEffectDialog: false
   },
   methods: {
     // 事件处理函数
-    bindViewTap() {
+    bindViewTap(e: any) {
       wx.navigateTo({
         url: '../logs/logs',
       })
@@ -83,7 +71,6 @@ Page({
         }
       })
     },
-<<<<<<< HEAD
     onTabbarChange(e: any) {
       const value = e.detail.value;
       if (value === 'plus') {
@@ -149,35 +136,5 @@ Page({
     onAbout() {
       wx.navigateTo({ url: '/pages/about/about' });
     },
-=======
-    switchTab(e) {
-      this.setData({ activeTab: e.currentTarget.dataset.tab });
-    },
-    openEffectDialog() {
-      this.setData({ showEffectDialog: true });
-    },
-    onCloseEffectDialog() {
-      this.setData({ showEffectDialog: false });
-    },
-    onSelect(e) {
-      this.setData({ files: e.detail.files });
-      // 上传后模拟生成效果图
-      this.setData({
-        showEffect: true,
-        effectFront: '/static/hair1.png',
-        effectSide: '/static/hair2.png',
-        effectBack: '/static/hair3.png'
-      });
-    },
-    onRemove(e) {
-      this.setData({ files: [], showEffect: false });
-    },
-    onUploadSuccess(e) {
-      // 可处理上传成功逻辑
-    },
-    onUploadFail(e) {
-      // 可处理上传失败逻辑
-    }
->>>>>>> 18cde87adc841a12d29663b9f8d821e9d6f363e2
   },
 })

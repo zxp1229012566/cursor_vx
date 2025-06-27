@@ -1,10 +1,6 @@
 {
   "usingComponents": {
-<<<<<<< HEAD
-    "t-back-top": "tdesign-miniprogram/back-top/back-top"
-  },
-  "navigationBarTitleText": "我的"
-=======
+    "t-back-top": "tdesign-miniprogram/back-top/back-top",
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
     "t-cell": "tdesign-miniprogram/cell/cell",
     "t-avatar": "tdesign-miniprogram/avatar/avatar",
@@ -13,5 +9,4 @@
     "t-switch": "tdesign-miniprogram/switch/switch"
   },
   "navigationBarTitleText": "个人中心"
->>>>>>> 18cde87adc841a12d29663b9f8d821e9d6f363e2
 } 
